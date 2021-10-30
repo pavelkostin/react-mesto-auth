@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react/cjs/react.development";
+import React, { useState } from 'react';
 import { Input } from "./Input";
 import { PopupWithForm } from "./PopupWithForm";
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
