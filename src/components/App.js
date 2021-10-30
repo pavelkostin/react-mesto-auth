@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { Route } from 'react-router-dom';
 import '../index.css';
 import { Header } from './Header';
 import { Main } from './Main';
@@ -113,6 +113,8 @@ export function App() {
 
       <div className='page'>
         <Header />
+        <Route path='/sign-up' />
+        <Route path='/sign-in' />
         <Main
           onEditProfile={handleEditProfileClick}
           onEditAvatar={handleEditAvatarClick}
