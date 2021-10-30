@@ -1,0 +1,15 @@
+.popup__container_gallery {
+
+        max-width: 70vw;
+        max-height: 70vh;
+        padding: 0;
+        margin: 90px auto;
+        background-color: transparent;
+        min-width: 282px;
+}
+
+@media screen and (max-width: 880px) {
+    .popup__container_gallery {
+        margin: 136px auto;
+    }
+}

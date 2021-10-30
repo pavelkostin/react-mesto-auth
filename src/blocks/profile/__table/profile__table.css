@@ -1,0 +1,21 @@
+.profile__table {
+    margin-left: 30px;
+
+    display: grid;
+    grid-template-areas: 
+    "name edit"
+    "job edit";
+    row-gap: 0;
+
+}
+
+@media screen and (max-width: 880px) {
+    .profile__table {
+
+        grid-template-areas: 
+        "name edit"
+        "job edit";
+
+        margin-left: 0;
+    }
+}

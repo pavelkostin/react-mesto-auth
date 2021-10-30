@@ -1,0 +1,11 @@
+.popup__section {
+
+    max-width: 358px;
+
+
+
+}
+
+.popup__section:nth-of-type(2) {
+    margin-top: 26px;
+}
