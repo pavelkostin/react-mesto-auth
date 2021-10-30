@@ -1,0 +1,14 @@
+.cards__quantity-likes {
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    height: 13px;
+    width: 10px;
+    grid-area: likesQuantity;
+    justify-self: center;
+    margin-top: 0;
+    margin-bottom: 22px;
+}

@@ -1,0 +1,19 @@
+.cards__place {
+
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: 29px;
+letter-spacing: 0em;
+text-align: left;
+grid-area: place;
+
+
+align-self: center;
+margin-left: 21px;
+
+text-overflow: ellipsis;
+white-space: nowrap;
+overflow: hidden;
+
+}

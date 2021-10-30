@@ -1,0 +1,21 @@
+.cards__item {
+    max-width: 282px;
+    border-radius: 10px;
+
+
+    list-style-type: none;
+    background-color: white;
+
+
+    display: grid;
+    grid-template-areas: 
+    "photo delete"
+    "place like"
+    "place likesQuantity";
+    grid-template-columns: 80% 20%;
+    grid-template-rows: 80% 10% 10%;
+
+
+
+    
+}
