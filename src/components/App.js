@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import '../index.css';
 import { Header } from './Header';
 import { Main } from './Main';
@@ -107,7 +108,9 @@ export function App() {
 
   return (
 
+
     <CurrentUserContext.Provider value={currentUser}>
+
       <div className='page'>
         <Header />
         <Main
@@ -126,6 +129,7 @@ export function App() {
         <ImagePopup onClose={closeAllPopups} card={selectedCard} />
         <PopupConfirm />
       </div>
+
     </CurrentUserContext.Provider>
 
   )
