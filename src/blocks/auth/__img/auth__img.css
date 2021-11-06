@@ -1,0 +1,8 @@
+.auth__img {
+    width: 120px;
+    height: 120px;
+    background-size: contain;
+    background-position: center;
+    align-self: center;
+    margin: 26px 0 32px 0;
+}

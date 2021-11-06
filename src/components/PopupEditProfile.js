@@ -49,8 +49,8 @@ export function PopupEditProfile({ onUpdateUser, onClose, isOpen }) {
                 className='popup__input popup__input_name'
                 placeholder='Имя'
                 type="text"
-                name='name'
-                id='name'
+                name='bio'
+                id='bio'
                 onChange={changeName}
             />
             <Input

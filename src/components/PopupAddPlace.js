@@ -32,8 +32,8 @@ export function PopupAddPlace({onClose, isOpen, onAddPlace}) {
                 className='popup__input popup__input_add popup__input_place'
                 placeholder='Название'
                 type="text"
-                name='name'
-                id='name'
+                name='place'
+                id='place'
                 inputRef={nameInput}
             />
             <Input
