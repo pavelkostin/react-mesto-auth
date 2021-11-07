@@ -8,6 +8,7 @@ function checkResponse(res) {
     return Promise.reject(`Ошибка ${res.status}`);
 }
 
+
 export const register = (password, email) => {
     return fetch(`${BASE_URL}/signup`, {
         method: 'POST',
@@ -18,8 +19,7 @@ export const register = (password, email) => {
             password, email
         })
     })
-    /*         .then(checkResponse)
-            .catch((err) => console.log(err)); */
+        .then(checkResponse)
 }
 
 

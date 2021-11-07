@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Switch, useHistory, withRouter, Redirect } from 'react-router-dom';
-import * as auth from './Auth';
+import * as auth from '../utils/Auth';
 import '../index.css';
-
+import { InfoToolTip } from './InfoTooltip';
 import { Main } from './Main';
 import { Footer } from './Footer';
 import { PopupEditProfile } from './PopupEditProfile';
@@ -22,13 +22,16 @@ function App() {
 
   const [cards, setCards] = useState([])
   const [currentUser, setCurrentUser] = useState({});
-
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [selectedCard, setSelectedCard] = useState({})
 
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [login, setLogin] = useState('')
 
+  const [open, setIsOpen] = useState(false);
+  const [regOk, setRegOK] = useState(false)
 
 
   useEffect(() => {
@@ -52,8 +55,71 @@ function App() {
             history.push('/')
           }
         })
+        .catch((err) => console.log(err))
     }
   }, [history])
+
+  function handleLogin() {
+    setLoggedIn(true)
+  }
+
+  function closeModal() {
+    setIsOpen(false)
+    setRegOK(false)
+
+  }
+
+  function registration(password, email) {
+    auth.register(password, email)
+
+      .then((res) => {
+        if (res) {
+          setIsOpen(true)
+          setRegOK(true)
+          setTimeout(() => {
+            setIsOpen(false)
+            history.push('/sign-in')
+          }, 2000)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+        setIsOpen(true)
+        setRegOK(false)
+        setTimeout(() => {
+          setIsOpen(false)
+        }, 2000)
+      })
+  }
+
+
+  function authorization(password, email) {
+    auth.login(password, email)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+        }
+      })
+      .then(() => {
+        handleLogin()
+        history.push('/')
+      })
+      .then(() => {
+        const jwt = localStorage.getItem('token')
+        if (jwt) {
+          auth.getContent(jwt)
+            .then(res => {
+              if (res) {
+                setLogin(res.data.email)
+                handleLogin()
+                history.push('/')
+              }
+            })
+            .catch((err) => console.log(err))
+        }
+      })
+  }
+
 
   function signOut() {
     localStorage.removeItem('token')
@@ -98,11 +164,7 @@ function App() {
   function handleCardDelete(card) {
     newApi.deleteCard(card)
       .then(() => {
-        setCards(cards.filter((cardsList) => {
-
-          return cardsList._id !== card._id
-
-        }))
+        setCards((state) => state.filter((c) => c._id !== card._id))
       })
       .catch((err) => console.log(err))
   }
@@ -135,12 +197,7 @@ function App() {
 
   }
 
-  function handleLogin() {
-    setLoggedIn(true)
-  }
 
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [login, setLogin] = useState('')
 
   return (
 
@@ -150,10 +207,10 @@ function App() {
 
 
           <Route path='/sign-up'>
-            <Register loggedIn={loggedIn} />
+            <Register loggedIn={loggedIn} registration={registration} />
           </Route>
           <Route path='/sign-in'>
-            <Login handleLogin={handleLogin} />
+            <Login handleLogin={handleLogin} authorization={authorization} />
           </Route>
 
           <ProtectedRoute
@@ -184,6 +241,7 @@ function App() {
         <PopupAddPlace isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
         <PopupEditAvatar isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <ImagePopup onClose={closeAllPopups} card={selectedCard} />
+        <InfoToolTip confirmReg={regOk} isOpen={open} onClose={closeModal} />
         <Footer />
       </div>
     </CurrentUserContext.Provider >

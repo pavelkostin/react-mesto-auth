@@ -1,24 +1,11 @@
 import { useState } from "react";
 import { NavLink, withRouter } from "react-router-dom";
-import { InfoToolTip } from './InfoTooltip';
+
 import { Header } from './Header';
-import * as auth from './Auth';
 
-function Register({ loggedIn, login }) {
 
-    /* const history = useHistory(); */
+function Register({ registration, loggedIn, login }) {
 
-    const [open, setIsOpen] = useState(false);
-    const [regOk, setRegOK] = useState(false)
-
-    function closeModal() {
-        setIsOpen(false)
-        setRegOK(false)
-        
-        setEmail('')
-        setPassword('')
-
-    }
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -33,24 +20,7 @@ function Register({ loggedIn, login }) {
 
     function handleSubmit(e) {
         e.preventDefault()
-
-
-        auth.register(password, email)
-
-            .then((res) => {
-                if(res.ok) {
-                    setIsOpen(true)
-                    setRegOK(true)
-                    setTimeout(()=>{
-                        setIsOpen(false)}, 2000)
-                }else{
-                    setIsOpen(true)
-                    setRegOK(false)
-                    setTimeout(()=>{
-                        setIsOpen(false)}, 2000)
-                }
-                
-            })
+        registration(password, email)
     }
 
 
@@ -66,7 +36,7 @@ function Register({ loggedIn, login }) {
                     <NavLink to="/sign-in" className="auth__link">Уже зарегистрированы? Войти</NavLink>
                 </form>
             </section>
-            <InfoToolTip confirmReg={regOk} isOpen={open} onClose={closeModal} />
+            
         </>
     )
 }
